@@ -43,6 +43,7 @@ Thumbs.db
 ###############
 
 .jshintrc
+data/
 
 ############
 ### NODE ###
