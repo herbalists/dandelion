@@ -1,5 +1,4 @@
 .app {
-  border: 1px solid red;
   display: grid;
   grid-template-columns: 20% 80%;
   grid-template-rows: auto auto;
