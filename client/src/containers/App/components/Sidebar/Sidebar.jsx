@@ -1,22 +1,78 @@
 import React, { Component } from 'react';
 import './Sidebar.css';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Drawer from '@material-ui/core/Drawer';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import MailIcon from '@material-ui/icons/Mail';
 
-class Sidebar extends Component {
-  render() {
-    return (
-        <div id="sidebar" className='sidebar'>
-            <div className='user-info'>User Info</div>
-            <ul className='dashboard-options'>
-                <li>Tasks</li>
-                <li>Social Media</li>
-                <li>Newsfeed</li>
-                <li>Journal</li>
-                <li>Health</li>
-                <li>Settings</li>
-            </ul>
+const drawerWidth = 200;
+
+const styles = theme => ({
+  root: {
+    display: 'flex',
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+  },
+  drawerPaper: {
+    width: drawerWidth,
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing.unit * 3,
+  },
+
+});
+
+function Sidebar(props) {
+  const { classes } = props;
+
+  return (
+    <div id="sidebar" className='sidebar'>
+        <div className='user-info'>User Info</div>
+        <div className={classes.root}>
+        <CssBaseline />
+        <Drawer
+            className={classes.drawer}
+            variant="permanent"
+            classes={{
+            paper: classes.drawerPaper,
+            }}
+        >
+            <div className={classes.toolbar} />
+            <List>
+            {['Tasks', 'Calendar', 'Newsfeed', 'Journal'].map((text, index) => (
+                <ListItem button key={text}>
+                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+                <ListItemText primary={text} />
+                </ListItem>
+            ))}
+            </List>
+            <Divider />
+            <List>
+            {['Tools', 'Settings'].map((text, index) => (
+                <ListItem button key={text}>
+                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+                <ListItemText primary={text} />
+                </ListItem>
+            ))}
+            </List>
+        </Drawer>
         </div>
-    );
-  }
+    </div>
+  );
 }
 
-export default Sidebar;
+Sidebar.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(Sidebar);

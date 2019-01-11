@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -14,9 +15,12 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import './Header.css';
 
-const styles = {
+const styles = theme => ({
   root: {
     flexGrow: 1,
+  },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
   },
   grow: {
     flexGrow: 1,
@@ -25,7 +29,8 @@ const styles = {
     marginLeft: -12,
     marginRight: 20,
   },
-};
+ 
+});
 
 class MenuAppBar extends React.Component {
   state = {
@@ -61,7 +66,8 @@ class MenuAppBar extends React.Component {
               label={auth ? 'Logout' : 'Login'}
             />
           </FormGroup> */}
-          <AppBar position="static">
+          <CssBaseline />
+          <AppBar position="static" className={classes.appBar}>
             <Toolbar>
               <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
                 <MenuIcon />
