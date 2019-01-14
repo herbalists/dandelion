@@ -14,7 +14,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import './Header.css';
-
+const drawerWidth = 200;
 const styles = theme => ({
   root: {
     flexGrow: 1,
@@ -67,7 +67,7 @@ class MenuAppBar extends React.Component {
             />
           </FormGroup> */}
           <CssBaseline />
-          <AppBar position="static" className={classes.appBar}>
+          <AppBar position="fixed" className={classes.appBar}>
             <Toolbar>
               <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
                 <MenuIcon />
