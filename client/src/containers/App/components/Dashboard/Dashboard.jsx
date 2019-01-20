@@ -1,35 +1,38 @@
-import React, { Component } from 'react';
-import './Dashboard.css';
+import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Block from './components/Block';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import Toolbar from '@material-ui/core/Toolbar';
 
 const styles = theme => ({
   root: {
-    display: 'flex',
+    minHeight: 100 + 'vh',
+    maxHeight: 100 + 'vh',
+    background: 'black',
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
   },
-  content: {
+  content: { 
     flexGrow: 1,
     padding: theme.spacing.unit * 3,
   },
   toolbar: theme.mixins.toolbar,
 });
 
-function Dashboard(props) {
-  const { classes } = props;
-  return (
-      <main position={'hidden'} className={classes.content}>
-      <div className={classes.toolbar} />
-          <Grid spacing={16}>
-            <Block/><Block/><Block/>
-          </Grid>
+class Dashboard extends React.Component {
+  render() {
+    const { classes } = this.props;
+    return (
+      <main position={'hidden'} className={classNames(classes.content, classes.root)}>
+        <div className={classes.toolbar} />
+        <div display='flex' flexWrap='wrap' flexDirection='row'>
+          <Block/><Block/><Block/>
+        </div>
       </main>
-  );
+    );
+  }
 }
 
 Dashboard.propTypes = {

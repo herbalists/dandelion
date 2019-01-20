@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import './Sidebar.css';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
@@ -19,22 +18,36 @@ const drawerWidth = 200;
 const styles = theme => ({
     root: {
       display: 'flex',
+      minHeight: 100 + 'vh',
+      maxHeight: 100 + 'vh',
     },
     appBar: {
       zIndex: theme.zIndex.drawer + 1,
+      transition: theme.transitions.create(['width', 'margin'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+    },
+    appBarShift: {
+      width: `calc(100% - ${drawerWidth}px)`,
+      transition: theme.transitions.create(['margin', 'width'], {
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+      marginRight: drawerWidth,
     },
     drawer: {
       width: drawerWidth,
-      flexShrink: 0,
     },
     drawerPaper: {
-      position: 'relative',
-      whiteSpace: 'nowrap',
       width: drawerWidth,
-      transition: theme.transitions.create('width', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
+    },
+    drawerHeader: {
+      display: 'flex',
+      alignItems: 'center',
+      padding: '0 8px',
+      ...theme.mixins.toolbar,
+      justifyContent: 'flex-start',
     },
     drawerPaperClose: {
       overflowX: 'hidden',
@@ -47,28 +60,25 @@ const styles = theme => ({
         width: theme.spacing.unit * 9,
       },
     },
-    content: {
-      flexGrow: 1,
-      padding: theme.spacing.unit * 3,
-    },
     toolbar: theme.mixins.toolbar,
+    hide: {
+      display: 'none',
+    },
   });
 
 class Sidebar extends React.Component {
   state = {
-    open: true
+    open: false
   };
 
   render() {
     const { classes } = this.props;
-    
+    const { open } = this.state;
     return (
-    
-      <div id="sidebar" className='sidebar'>
-          <div className={classes.root}>
+      <div className={classes.root}>
           <Drawer
               classes={{
-                paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
+                paper: classNames(classes.drawerPaper, classes.root, !this.state.open && classes.drawerPaperClose),
               }}
               variant="permanent"
               open={this.state.open}
@@ -96,7 +106,6 @@ class Sidebar extends React.Component {
               ))}
               </List>
           </Drawer>
-          </div>
       </div>
     );
   }
