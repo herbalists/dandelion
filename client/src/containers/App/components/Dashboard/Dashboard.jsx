@@ -9,7 +9,7 @@ const styles = theme => ({
   root: {
     minHeight: 100 + 'vh',
     maxHeight: 100 + 'vh',
-    background: 'black',
+    background: 'white',
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -28,7 +28,7 @@ class Dashboard extends React.Component {
       <main position={'hidden'} className={classNames(classes.content, classes.root)}>
         <div className={classes.toolbar} />
         <div display='flex' flexWrap='wrap' flexDirection='row'>
-          <Block/><Block/><Block/>
+          <Block/>
         </div>
       </main>
     );
